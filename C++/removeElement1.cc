@@ -3,24 +3,21 @@ public:
     int removeElement(int A[], int n, int elem) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        if (A == NULL || n == 0)
+        if (n <= 0)
         {
-            return 0;
+            return n;
         }
         
-        int index = 0;
-        int newIndex = 0;
+        int newLen = 0;
         
-        for (int index = 0; index < n; index++)
+        for (int i = 0; i < n; i++)
         {
-            if (A[index] == elem)
+            if (A[i] != elem)
             {
-                continue;
+                A[newLen++] = A[i];
             }
-            
-            A[newIndex++] = A[index];
         }
         
-        return newIndex;
-    }   
+        return newLen;
+    }
 };

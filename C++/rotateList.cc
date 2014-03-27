@@ -8,42 +8,42 @@
  */
 class Solution {
 public:
-    ListNode *removeNthFromEnd(ListNode *head, int n) {
+    ListNode *rotateRight(ListNode *head, int k) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        if (n <= 0)
+        if (!head || !head->next || k <= 0)
         {
             return head;
         }
         
         ListNode *slow = head;
         ListNode *fast = head;
-        ListNode *prev = slow;
         
-        for (int i = 0; i < n; i++)
+        for (int i = 1; i <= k; i++)
         {
             if (fast == NULL)
             {
-                return NULL;
+                return head;
             }
+            
             fast = fast->next;
         }
         
         if (fast == NULL)
         {
-            delete slow;
-            return prev->next;
+            return head;
         }
         
-        while (fast != NULL)
+        while (!fast)
         {
-            prev = slow;
             fast = fast->next;
             slow = slow->next;
         }
         
-        prev->next = slow->next;
-        delete slow;
-        return head;
+        ListNode *newHead = slow->next;
+        slow->next = NULL;
+        fast->next = head;
+        
+        return newHead;
     }
 };

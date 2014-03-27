@@ -11,39 +11,42 @@ public:
     ListNode *removeNthFromEnd(ListNode *head, int n) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        if (n <= 0)
+        if (!head || n <= 0)
         {
             return head;
         }
         
         ListNode *slow = head;
         ListNode *fast = head;
-        ListNode *prev = slow;
         
         for (int i = 0; i < n; i++)
         {
-            if (fast == NULL)
+            if (!fast)
             {
-                return NULL;
+                return head;
             }
             fast = fast->next;
         }
         
-        if (fast == NULL)
+        if (!fast)
         {
-            delete slow;
-            return prev->next;
+            ListNode *temp = head;
+            head = head->next;
+            delete temp;
+            return head; 
         }
         
-        while (fast != NULL)
+        ListNode *prev = NULL;
+        while (fast)
         {
             prev = slow;
             fast = fast->next;
             slow = slow->next;
         }
         
+        ListNode *temp = slow;
         prev->next = slow->next;
-        delete slow;
-        return head;
+        delete temp;
+        return head; 
     }
 };
