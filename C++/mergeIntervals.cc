@@ -6,6 +6,33 @@ struct startIncreasing
 	}
 } start_increase;
 
+class Solution 
+{
+	public:
+		vector<Interval> merge(vector<Interval> &intervals) 
+		{
+			int N = intervals.size();
+			if (N <= 1) return intervals;
+			sort(intervals.begin(), intervals.end(), mycompare);
+			vector<Interval> res;
+			Interval last = intervals[0];
+			for (int i = 1; i < N; ++i)
+			{
+				if (intervals[i].start > last.end) 
+				{
+					res.push_back(last);
+					last = intervals[i];
+				} 
+				else 
+				{
+					last.end = max(last.end, intervals[i].end);
+				}
+			}
+			res.push_back(last);
+			return res;
+		}
+};
+
 vector<Interval> merge(vector<Interval> &intervals) 
 {
 	// Start typing your C/C++ solution below

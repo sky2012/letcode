@@ -1,3 +1,42 @@
+class Solution {
+public:
+    int atoi(const char *str) {
+        
+        long long value = 0;
+        int sign = 1;
+        int i = 0;
+        int result;
+        
+        while (str[i]  == ' ')
+        {
+            i++;
+        }
+        
+        sign = (str[i] == '-' ? -1 : 1);
+        
+        if (str[i] == '+' || str[i] == '-')
+        {
+            i++;
+        }
+        
+        for (; str[i] >= '0' && str[i] <= '9'; i++)
+        {
+            value = (str[i] - '0') + value * 10;
+        }
+        
+        if (sign == 1)
+        {
+            return (value >= INT_MAX ? INT_MAX : value);
+        }
+        else
+        {
+            return (value * sign <= INT_MIN ? INT_MIN : value * sign);
+        }
+        
+    }
+};
+
+
 int atoi(const char *str) 
 {
 	// Start typing your C/C++ solution below

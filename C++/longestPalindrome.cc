@@ -11,36 +11,36 @@ public:
         }
         
         string result = s.substr(0, 1);
-        
         for (int i = 0; i < len - 1; i++)
         {
-            string oddPali = expandCenter(s, i, i);
+            string odd = expandAroundCenter(s, i, i);
             
-            if (result.length() < oddPali.length())
+            if (odd.size() > result.size())
             {
-                result = oddPali;
+                result = odd;
             }
             
-            string evenPali = expandCenter(s, i, i+1);
+            string even = expandAroundCenter(s, i, i + 1);
             
-            if (result.length() < evenPali.length())
+            if (even.size() > result.size())
             {
-                result = evenPali;
+                result = even;
             }
         }
         
         return result;
     }
     
-    string expandCenter(string str, int left, int right)
+    string expandAroundCenter(string s, int begin, int end)
     {
+        int len = s.size();
         
-        while (left >= 0 && right < str.size() && str[left] == str[right])
-        {
-            left--;
-            right++;
+        while (begin >= 0 && end < len && s[begin] == s[end])
+        { 
+            begin--;
+            end++;
         }
         
-        return str.substr(left + 1, right - left - 1);
+        return s.substr(begin + 1, end - begin - 1);
     }
 };
